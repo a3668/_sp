@@ -19,8 +19,8 @@ MEMORY_SIZE 是 4096 bytes，但是從 0x200 開始，所以剩下 3584，檔案
 ### void chip8_emulate_cycle
 
 這是 CHIP-8 每一個「CPU 週期」的核心執行函數
-opcode 參考http://devernay.free.fr/hacks/chip8/C8TECH10.HTM  
-https://en.wikipedia.org/wiki/CHIP-8#Opcode_table  
+[opcode 參考](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM  
+https://en.wikipedia.org/wiki/CHIP-8#Opcode_table)
 一開始從記憶體的 pc 位置，連續讀 2 bytes，組合成一條 16-bit 指令  
 解碼指令 (opcode)：先用 & 0xF000 取出高 4 bits（最高位）  
 剩下的 12 bits 負責給這條指令需要的參數  
