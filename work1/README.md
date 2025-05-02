@@ -90,39 +90,50 @@ SDL_RENDERER_PRESENTVSYNC: 啟用垂直同步 (防止畫面撕裂)
 
 #### void display_destroy
 
-檢查渲染器指標和視窗指標是否有效，有效則銷毀它  
+檢查渲染器指標和視窗指標是否有效，有效則銷毀它
 
-------
+---
 
 # main.c
+
 負責程式的啟動、初始化各個模組、執行主要的模擬迴圈，以及在程式結束時進行清理工作
+
 #### if (argc < 2)
+
 檢查使用者是否提供了 ROM 檔案名
 如果參數數量小於 2 (程式名本身算一個參數)就是沒找到
 接下來初始化 Chip8 模擬器的內部狀態 (如記憶體、暫存器等)
-#### if (!chip8_load_rom(&chip8, argv[1])) 
+
+#### if (!chip8_load_rom(&chip8, argv[1]))
+
 呼叫 chip8_load_rom 載入 ROM，檢查回傳值判斷是否成功
+
 #### if (!display_init(&disp))
+
 初始化顯示模組 (建立視窗和渲染器等)
+
 #### SDL 事件變數和程式運行旗標
-running = 1表示正在進行，0表示準備退出
+
+running = 1 表示正在進行，0 表示準備退出
+
 #### chip8_emulate_cycle(&chip8)
+
 呼叫函式執行 Chip-8 CPU 的一個指令週期
+
 #### display_render(&disp, chip8.gfx)
+
 將 Chip8 模擬器狀態中的顯示記憶體 (gfx 陣列) 傳給顯示模組進行繪製
+
 #### SDL_Delay(1000 / 60);
+
 這裡設定為 1000 毫秒 / 60 幀 = 約 16.6 毫秒，約 60 Hz
+
 #### display_destroy(&disp)
+
 進行清理
 
+[SDL2 內容](https://wiki.libsdl.org/SDL2/FrontPage)  
 
 
-
-
-
-
-
-
-[SDL2 內容](https://wiki.libsdl.org/SDL2/FrontPage)
 test_opcode.ch8 測試 Opcode 是否正確
 Keypad_Test.ch8 測試鍵盤對應
