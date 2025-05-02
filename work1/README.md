@@ -1,13 +1,13 @@
 # chip8.c
 
-### void chip8_init
+## void chip8_init
 
 初始化函式
 設定亂數，避免每次啟動遊戲位置都相同
 0x200 是遊戲起始位址，前面的 0x000~0x1FF 給字型資料和系統用，避免衝突
 Index Register 和 Stack Pointer 都設為 0
 
-### int chip8_load_rom
+## int chip8_load_rom
 
 打開 ROM 檔案讀進 0x200 這個位置
 rb 代表用二進位模式讀檔
@@ -16,7 +16,7 @@ read binary
 MEMORY_SIZE 是 4096 bytes，但是從 0x200 開始，所以剩下 3584，檔案不能超過
 沒問題後就把檔案內容寫進記憶體
 
-### void chip8_emulate_cycle
+## void chip8_emulate_cycle
 
 這是 CHIP-8 每一個「CPU 週期」的核心執行函數
 [opcode 參考](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM  
@@ -43,7 +43,7 @@ https://en.wikipedia.org/wiki/CHIP-8#Opcode_table)
 0xE000 → 鍵盤判斷 EX9E / EXA1  
 0xF000 → 計時器、記憶體相關操作
 
----
+-----
 
 # input.c
 
@@ -52,11 +52,15 @@ input_update 這函式的作用是接收一個 SDL 鍵盤事件 e 和 Chip-8 模
 e->key.keysym.sym 取得了事件中按下的具體按鍵符號  
 ![鍵盤圖](/pic/keypad.png)
 
-### display_init
+----
+
+#  display.c
+
+## display_init
 
 初始化 SDL 的顯示系統和建立視窗和渲染
 
-#### if (!disp->window)
+### if (!disp->window)
 
 檢查視窗是否建立成功，失敗會輸出錯誤訊息和清除已初始化的部分  
 成功後為視窗建立一個渲染器
@@ -64,31 +68,31 @@ e->key.keysym.sym 取得了事件中按下的具體按鍵符號
 SDL_RENDERER_ACCELERATED: 啟用硬體加速  
 SDL_RENDERER_PRESENTVSYNC: 啟用垂直同步 (防止畫面撕裂)
 
-#### SDL_SetRenderDrawColor(disp->renderer, 0, 0, 0, 255)
+### SDL_SetRenderDrawColor(disp->renderer, 0, 0, 0, 255)
 
 初始設定渲染器的繪圖顏色為黑色和不透明
 
-#### SDL_RenderClear(disp->renderer)
+### SDL_RenderClear(disp->renderer)
 
 用當前繪圖顏色清除渲染器的繪圖緩衝區
 
-#### SDL_RenderPresent(disp->renderer)
+### SDL_RenderPresent(disp->renderer)
 
 將渲染器緩衝區的內容呈現到視窗上，讓視窗顯示為全黑
 
-### display_render
+## display_render
 
 負責將 Chip-8 的像素資料 (gfx) 繪製到 SDL 視窗上
 
-#### SDL_SetRenderDrawColor(disp->renderer, 0, 0, 0, 255);
+### SDL_SetRenderDrawColor(disp->renderer, 0, 0, 0, 255);
 
 清除上一幀的畫面 (塗成黑色)
 
-#### SDL_SetRenderDrawColor(disp->renderer, 255, 255, 255, 255);
+### SDL_SetRenderDrawColor(disp->renderer, 255, 255, 255, 255);
 
 設定繪圖顏色為白色，用於繪製 Chip-8 開啟的像素
 
-#### void display_destroy
+## void display_destroy
 
 檢查渲染器指標和視窗指標是否有效，有效則銷毀它
 
@@ -98,37 +102,37 @@ SDL_RENDERER_PRESENTVSYNC: 啟用垂直同步 (防止畫面撕裂)
 
 負責程式的啟動、初始化各個模組、執行主要的模擬迴圈，以及在程式結束時進行清理工作
 
-#### if (argc < 2)
+## if (argc < 2)
 
 檢查使用者是否提供了 ROM 檔案名
 如果參數數量小於 2 (程式名本身算一個參數)就是沒找到
 接下來初始化 Chip8 模擬器的內部狀態 (如記憶體、暫存器等)
 
-#### if (!chip8_load_rom(&chip8, argv[1]))
+## if (!chip8_load_rom(&chip8, argv[1]))
 
 呼叫 chip8_load_rom 載入 ROM，檢查回傳值判斷是否成功
 
-#### if (!display_init(&disp))
+## if (!display_init(&disp))
 
 初始化顯示模組 (建立視窗和渲染器等)
 
-#### SDL 事件變數和程式運行旗標
+## SDL 事件變數和程式運行旗標
 
 running = 1 表示正在進行，0 表示準備退出
 
-#### chip8_emulate_cycle(&chip8)
+## chip8_emulate_cycle(&chip8)
 
 呼叫函式執行 Chip-8 CPU 的一個指令週期
 
-#### display_render(&disp, chip8.gfx)
+## display_render(&disp, chip8.gfx)
 
 將 Chip8 模擬器狀態中的顯示記憶體 (gfx 陣列) 傳給顯示模組進行繪製
 
-#### SDL_Delay(1000 / 60);
+## SDL_Delay(1000 / 60);
 
 這裡設定為 1000 毫秒 / 60 幀 = 約 16.6 毫秒，約 60 Hz
 
-#### display_destroy(&disp)
+## display_destroy(&disp)
 
 進行清理
 
