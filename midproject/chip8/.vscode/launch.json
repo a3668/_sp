@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/kai/Desktop/_sp/hw3",
-      "program": "/Users/kai/Desktop/_sp/hw3/build/Debug/outDebug"
+      "cwd": "/Users/kai/Desktop/chip8",
+      "program": "/Users/kai/Desktop/chip8/build/Debug/outDebug"
     }
   ]
 }

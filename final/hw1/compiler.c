@@ -142,18 +142,18 @@ void DOWHILE()
     int doBegin = nextLabel(); // 產生 do-while 迴圈開始的標籤
     int doEnd = nextLabel();   // 產生 do-while 迴圈結束的標籤
 
-    skip("do"); // 消費 do 關鍵字
+    skip("do"); // 跳過 do 關鍵字
 
     emit("(L%d)\n", doBegin); // 輸出開始標籤
 
     STMT(); // 執行 do-while 迴圈內的敘述
 
     // 處理 while 條件部分
-    skip("while"); // 消費 while 關鍵字
-    skip("(");     // 消費左括號 '('
+    skip("while"); // 跳過 while 關鍵字
+    skip("(");     // 跳過左括號 '('
     int e = E();   // 解析條件表達式，結果存入臨時變數 e
-    skip(")");     // 消費右括號 ')'
-    skip(";");     // 消費分號 ';'
+    skip(")");     // 跳過右括號 ')'
+    skip(";");     // 跳過分號 ';'
 
     // 若條件成立，跳回 do-while 迴圈開始的標籤
     emit("if T%d goto L%d\n", e, doBegin);
