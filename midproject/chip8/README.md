@@ -26,8 +26,8 @@ CHIP-8 是一個簡單的虛擬機器，最初設計用於在 1970 年代的計�
 
 ### void chip8_emulate_cycle
 
-這是 CHIP-8 每一個「CPU 週期」的核心執行函數
-[opcode 參考](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM  
+這是 CHIP-8 每一個「CPU 週期」的核心執行函數  
+![opcode 參考](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM  
 https://en.wikipedia.org/wiki/CHIP-8#Opcode_table)
 執行流程：  
 一開始從記憶體的 pc 位置，連續讀 2 bytes，組合成一條 16-bit 指令    
