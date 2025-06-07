@@ -210,11 +210,11 @@ Idx Name Size VMA Type
 3 **compact_unwind 00000080 0000000000000248 DATA
 ```
 
-Idx：區段索引（從 0 開始編號），方便參考與程式碼定位  
-Name：區段名稱
-Size：區段大小，表示這個區段在檔案或記憶體中所佔的位元組數
-VMA：這個區段在執行時載入到記憶體的起始位址
-Type：區段類型：TEXT 或 DATA
-前兩個是機器碼（.text）和常數資料（.const），
-接著是字串區段（.cstring），儲存程式中用到的 C 字串，
-最後是用於例外與呼叫堆疊還原的精簡 unwind 資料（.compact_unwind）。
+Idx：區段索引（從 0 開始編號），方便參考與程式碼定位   
+Name：區段名稱  
+Size：區段大小，表示這個區段在檔案或記憶體中所佔的位元組數  
+VMA：這個區段在執行時載入到記憶體的起始位址  
+Type：區段類型：TEXT 或 DATA  
+前兩個是機器碼（.text）和常數資料（.const）  
+接著是字串區段（.cstring），儲存程式中用到的 C 字串  
+最後是用於例外與呼叫堆疊還原的精簡 unwind 資料（.compact_unwind）
