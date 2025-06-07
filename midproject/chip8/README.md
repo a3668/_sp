@@ -71,7 +71,7 @@ https://en.wikipedia.org/wiki/CHIP-8#Opcode_table)
 - e->key.keysym.sym 取得了事件中按下的具體按鍵符號
 - 對應 CHIP-8 的 16 鍵鍵盤布局
 
-<img src="./pic/keypad.png" alt="鍵盤圖" width="300">
+<img src="./pic/keypad.png" alt="鍵盤圖" width="500">
 
 ---
 
