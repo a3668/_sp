@@ -11,7 +11,9 @@
 
 ### 執行方式
 
+```
 ./compiler test/while.c
+```
 
 ## DOWHILE = do STMT while (E);
 
