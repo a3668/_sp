@@ -29,11 +29,11 @@ CHIP-8 是一個簡單的虛擬機器，最初設計用於在 1970 年代的計�
 這是 CHIP-8 每一個「CPU 週期」的核心執行函數
 [opcode 參考](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM  
 https://en.wikipedia.org/wiki/CHIP-8#Opcode_table)
-執行流程：
-一開始從記憶體的 pc 位置，連續讀 2 bytes，組合成一條 16-bit 指令  
-解碼指令 (opcode)：先用 & 0xF000 取出高 4 bits（最高位）  
+執行流程：  
+一開始從記憶體的 pc 位置，連續讀 2 bytes，組合成一條 16-bit 指令    
+解碼指令 (opcode)：先用 & 0xF000 取出高 4 bits（最高位）    
 剩下的 12 bits 負責給這條指令需要的參數  
-高 4 bits 決定這是哪一「大類」指令（例如跳躍、暫存器操作、繪圖等等）
+高 4 bits 決定這是哪一「大類」指令（例如跳躍、暫存器操作、繪圖等等） 
 
 指令集分類如下：
 
